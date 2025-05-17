@@ -38,6 +38,7 @@ class MastermindEnv(ta.Env):
 
         # generate secret code 
         available_numbers = list(range(1, self.num_numbers + 1))
+        random.seed(seed)
         sample_fn = random.choices if self.duplicate_numbers else random.sample
         code = sample_fn(available_numbers, k=self.code_length)
         # if self.duplicate_numbers:
@@ -53,7 +54,7 @@ class MastermindEnv(ta.Env):
         """ Generates the initial prompt for a player """
         prompt = (
             f"You are Player {player_id}. You are playing Mastermind.\n"
-            f"... that is {self.code_length} digits long, each digit from 1 to {self.num_numbers}, "
+            f"Your goal is to guess the other player's secret code that is {self.code_length} digits long, each digit from 1 to {self.num_numbers}, "
             f"{'with possible repeats' if self.duplicate_numbers else 'with no duplicates'}.\n"
             "In your response, you can mention any code or previously submitted code in the format of 1 2 3 4. Only when you have decided to make your guess, then you must strictly enter the code in square brackets like [2 1 4 5]. This is to avoid submitting a wrong code to the game environment.\n"
             "Hence, if you are quoting a recent guess, you must mention the numbers without the square brackets.\n"

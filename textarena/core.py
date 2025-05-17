@@ -92,6 +92,7 @@ class State:
         if seed is not None:
             random.seed(seed)
 
+        print(f"Game started with seed {seed}.")
         self._reset_game_parameters()
 
         # generate the player prompts
