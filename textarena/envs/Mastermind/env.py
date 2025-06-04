@@ -142,6 +142,11 @@ class MastermindEnv(ta.Env):
         self.state.game_state["guess"] = player_guess
         return self.state.step()
 
+    def _get_secret_code(self):
+        """ Returns the secret code from the game state """
+        secret_code = self.state.game_state["secret_code"]
+        #convert to string
+        return " ".join(map(str, secret_code))
     
     def _evaluate_guess(self, player_id: int, player_guess: List[int]) -> Tuple[int, int]:
         """
