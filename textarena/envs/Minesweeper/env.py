@@ -124,6 +124,7 @@ class MinesweeperEnv(ta.Env):
                         if self.grid[current_row][current_col] == -1:
                             reason=f"Game over! Player {player_id} hit a mine at ({current_row}, {current_col})."
                             self.state.set_invalid_move(player_id=player_id, reason=reason)
+                            self.state.done = True
 
                         # If the cell has no adjacent mines, add its neighbors to the queue
                         if self.grid[current_row][current_col] == 0:
